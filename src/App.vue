@@ -1200,29 +1200,9 @@ export default {
   async mounted() {
     // initialize filter hiding/showing thing
 
-    if (!this.showFilter) {
-      const filterTriggerPoint = document.querySelector('#filter-trigger');
-      const filterTriggerObserver = new IntersectionObserver(
-        ([e]) => {
-          if (e.intersectionRatio > 0) {
-            this.canShowFilter = true;
-            window.localStorage.setItem('canSeeFilter', "true");
-          }
-        }
-      )
-
-      const filter = document.getElementById('filter-root');
-      const filterRootObserver = new IntersectionObserver(
-        ([e]) => {
-          if (this.canShowFilter && e.intersectionRatio > 0) {
-            this.showFilter = true;
-          }
-        }
-      )
-
-      filterTriggerObserver.observe(filterTriggerPoint);
-      filterRootObserver.observe(filter);
-    }
+    // ensure filter is collapsed the first time we open the page
+    // allow having it uncollapsed on subsequent visits
+    window.localStorage.setItem('canSeeFilter', "true");
     
     // get data
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/1qgddox_aheEegSoGKyLCYqUGUbBH3ItG7jvH9EWgKYM/gviz/tq?tqx=out:csv';
