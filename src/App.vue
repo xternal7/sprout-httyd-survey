@@ -391,7 +391,7 @@
           <div class="chart-area-fullwidth">
             <div class="chart-box">
               <h3>Has seen series?</h3>
-              <VueApexCharts type="radialBar" height="390" :options="chartOptions.seriesRatingsAvgOptions" :series="chartData.seriesViewership"></VueApexCharts>
+              <VueApexCharts type="radialBar" height="390" :options="chartOptions.seriesViewershipOptions" :series="chartData.seriesViewership"></VueApexCharts>
             </div>
             <div class="chart-box">
               <h3>Average ratings</h3>
@@ -638,6 +638,8 @@ var WatchedSeries = Object.freeze({
   Both: 3,
 });
 
+var platformMaxValue = 1;
+
 export default {
   name: 'App',
   components: {
@@ -760,7 +762,7 @@ export default {
           size: 0
         },
         formatter: function(seriesName, opts) {
-          return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+          return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex] / 10;
         },
         itemMargin: {
           horizontal: 3,
@@ -847,7 +849,7 @@ export default {
     };
 
     const ratingDistributionBase = {
-      ...stackedOptionsBase,
+      ...JSON.parse(JSON.stringify(stackedOptionsBase)),
       colors: this.getColorGradient(10, endColor, startColor)
     }
 
@@ -877,17 +879,38 @@ export default {
 
     const hasReachedEnd = !!window.localStorage.getItem('canSeeFilter');
 
+
+    const platformOptions = {
+      ...JSON.parse(JSON.stringify(radialOptionsBase)),
+      colors: this.getColorGradient(allPlatforms.length, startColor, endColor),
+      labels: allPlatforms.map(x => x.name),
+    };
+    platformOptions.legend.offsetY = 0;
+    platformOptions.legend.formatter = function(seriesName, opts) {
+      return seriesName + ":  " + (opts.w.globals.series[opts.seriesIndex] * platformMaxValue).toFixed();
+    };
+
+    const seriesRatingsAvgOptions = {
+      ...radialOptionsBase,
+      colors: this.getColorGradient(3, startColor, endColor),
+      labels: [
+        'RoB/DoB',
+        'RTTE',
+      ]
+    };
+
+    const seriesViewershipOptions = JSON.parse(JSON.stringify(seriesRatingsAvgOptions));
+    seriesViewershipOptions.legend.formatter = function(seriesName, opts) {
+      return `${seriesName}: ${(opts.w.globals.series[opts.seriesIndex]).toFixed()}%`;
+    };
+
     return {
       dataRows: [],
       correctionFactors: {
         platform: 1.1,
       },
       chartOptions: {
-        platform: {
-          ...radialOptionsBase,
-          colors: this.getColorGradient(allPlatforms.length, startColor, endColor),
-          labels: allPlatforms.map(x => x.name),
-        },
+        platform: platformOptions,
         age: {
           ...stackedOptionsBase,
           colors: this.getColorGradient(6, startColor, endColor),
@@ -936,14 +959,8 @@ export default {
             categories: strongestWeakestCategories
           }
         },
-        seriesRatingsAvgOptions: {
-          ...radialOptionsBase,
-          colors: this.getColorGradient(3, startColor, endColor),
-          labels: [
-            'RoB/DoB',
-            'RTTE',
-          ]
-        },
+        seriesViewershipOptions: seriesViewershipOptions,
+        seriesRatingsAvgOptions: seriesRatingsAvgOptions,
         seriesRatingDistributionOptions: {
           ...ratingDistributionBase,
           xaxis: {
@@ -1683,6 +1700,15 @@ export default {
         chartData.betterIfNot[row.betterIfNot]++;
       }
 
+      // save real counts before we wreck them
+      chartData.platformReal = [...chartData.platform];
+
+      // normalize platform data to 1-100
+      platformMaxValue = chartData.platform.reduce( (acc, x) => Math.max(acc, x)) * 0.0102;
+      for (const p in chartData.platform) {        
+        chartData.platform[p] /= platformMaxValue;
+      }
+
       // get average ratings to 1-100
       for (const mar in chartData.movieRatingsAvg) {
         chartData.movieRatingsAvg[mar] = Math.round(chartData.movieRatingsAvg[mar] * 10 / (ratingCounts[mar] ? ratingCounts[mar] : 1))
@@ -1698,7 +1724,7 @@ export default {
     },
     processData() {
       this.chartData = this.processDataWithFilters(this.enabledFilters, this.filterConfig);
-      this.responseCount = this.chartData.platform.reduce( (acc, x) => acc + x);
+      this.responseCount = this.chartData.platformReal.reduce( (acc, x) => acc + x);
     },
     /**
      * UI-RELATED FUNCTIONS
@@ -1910,6 +1936,8 @@ FilterCategory {
 }
 
 .category-break {
+  user-select: none;
+  cursor: pointer;
   margin-top: 5rem;
   text-align: center;
   font-family: 'IM FELL DW Pica SC';
