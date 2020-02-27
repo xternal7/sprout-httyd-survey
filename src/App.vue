@@ -460,12 +460,12 @@
         
         <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
 
-        <div class="category-break" :class="{'expanded': ses.analystDesk, 'collapsed': !ses.analystDesk}" @click="toggleItem('analystDesk')">
+        <div id="filter-trigger" class="category-break" :class="{'expanded': ses.analystDesk, 'collapsed': !ses.analystDesk}" @click="toggleItem('analystDesk')">
           <SplatterBg>Back to the analyst desk</SplatterBg>
         </div>        
         <template v-if="ses.analystDesk">
           <div class="content">
-            <p id="filter-trigger">
+            <p >
               Congratulations! That's been all the raw data and charts for the day. You can stay for a while longer for some additional analysis. You can take this cookie and scroll up and play with the filters without my soapboxing. Also don't tell auntie EU that I gave you that cookie.
             </p>
           </div>
