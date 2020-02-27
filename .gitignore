@@ -21,4 +21,4 @@ yarn-error.log*
 *.sw?
 
 # extras
-assets_source
+assets-source
