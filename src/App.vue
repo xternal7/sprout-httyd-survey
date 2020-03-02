@@ -19,6 +19,7 @@
         <p>
           There's quite some svg graphs and javascript that handle data on this page. Expect slowdowns.
         </p>
+        <p><b>Headers are collapsible, filters are hidden by default</b> — click 'filters' to show filters.</p>
       </div>
       <div id="filter-root" class="flex-column">
         <div class="category-break" :class="{'expanded': ses.filters, 'collapsed': !ses.filters}" @click="toggleItem('filters')">
@@ -468,12 +469,26 @@
             <p >
               Congratulations! That's been all the raw data and charts for the day. You can stay for a while longer for some additional analysis. You can take this cookie and scroll up and play with the filters without my soapboxing. Also don't tell auntie EU that I gave you that cookie.
             </p>
+            <p>
+              Be warned though: there's some mad soapboxing and edginess ahead.
+            </p>
           </div>
           <div class="content">
 
+            <h2>Demographical differences</h2>
+            <p>There's no secret that different platforms voted differently. Instagram is the "HTTYD3 sucks" powerhouse (with average rating of 4.8 — average without instagram is 6.5). They're just as likely to acknowledge HTTYD1's superiority with <i>1 > 2 > 3</i> getting a 10 percentage increase over the baseline (mostly at the expense of <i>1 > 3 > 2</i> option). Ending and light fury rating fare even worse (3.6 and 4.1, respectively — compared to 6.0 and 4.8, respectively).</p>
+            <p>Wikia and tumblr's share of answers is pretty insignificant, but there's some mildly interesting happenings there. HTTYD1 reigns supremer on these two. 64+7% for Wikia (to the ~50 average of all) and 78+6% for Tumblr.</p>
+            <p>Subreddit invokes some choice comments of people's tastes by having only ~40% of people rank the first movie the highest and third the lowest, but that doesn't quite show in the overall ratings or rating distributions.</p>
+            <p>Older demographics tend to prefer HTTYD1 and anti-prefer HTTYD3 the most: the older you get, the bigger the 1 > 2 > 3 part of the pie gets. Thinking that writing is the worst aspect of The Hidden World is its writing also generally increases with age (although baseline is fairly high to begin with).</p>
+
+            <h2>The Hidden World would be a better movie if it wasn't a part of the franchise</h2>
+            <p>
+              This question brings no surprises <i>at all.</i> I've filtered the charts to only include results of people who thought The Hidden World is bad (&lt;5 — we ain't doing 'net promotor' crap even tho some people might have voted that way) and — surprise but not really — a slim majority of those people believes that the movie would be better if it wasn't a part of the franchise.  13.5% believe that THW would be just as trash as it is now, and the rest have no opinion either way.
+            </p>
+
             <h2>"Best" versus "I like it most"</h2>
             <p>The writing of The Hidden World is objectively bad in so many ways, but that doesn't stop people from liking or enjoying the movie, because let's be honest: the movie does provide a certain amount of mindless entertainment and it manages to hold together well enough — just as long as you don't think about it too much.</p>
-            <p>As soon as results started to roll in, I started to wonder whether anyone will be able to separate their enjoyment of the movie from whether the movie is good or not. The results are in and — yes. Even before the polling ended, the worst ratings for The Hidden World by people who ranked The Hidden World first was far below the worst rantings for The Hidden World:</p>
+            <p>As soon as results started to roll in, I started to wonder whether anyone will be able to separate their enjoyment of the movie from whether the movie is good or not. The results are in and — yes. Even before the polling ended, the worst ratings for The Hidden World by people who ranked The Hidden World first was far below the worst rantings for the other two:</p>
             <div class="w100 center">
               <img src='./assets/graphs/ranking-vs-rating.svg' /><br/>
               <p><small>
@@ -482,8 +497,13 @@
             </div>
             <p>But these four cases are only the ones that are easiest to see. Overall, there's {{extraStatistics.favNotBest}} ({{ (extraStatistics.favNotBest/dataRows.length * 100).toFixed(2)}}%) cases of people indicating they prefer a movie they deemed worse than the others. It's clear that some of you recognize that liking something the most doesn't mean must be the best and vice versa. This is a rare line of thinking and it deserves a special commendation.</p>
 
-
-
+            <h2>"Strongest aspect of THW is the story" crowd</h2>
+            <p>
+              I want one of the 32 people picking that option to find me a dealer who deals in stuff so potent it can make the plot of The Hidden World seem sensible and logical and coherent. Surprisingly enough, average ratings for that group appear to be nearly the same as the global average for the first two movie — it's just the rating for The Hidden World that gets the boost.
+            </p>
+            <h2>"Weakest aspect of HTTYD1 is the story" crowd</h2>
+            <p>You may entrust me contact info of your dealers as well lol. Especially the 5 people who fit into this and previous category.</p>
+            <p>This is surprising because the older crowd is getting some mad representation in this category. 18+ takes the majority on the age chart.</p>
 
             
           </div>
