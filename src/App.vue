@@ -481,6 +481,11 @@
             <p>Subreddit invokes some choice comments of people's tastes by having only ~40% of people rank the first movie the highest and third the lowest, but that doesn't quite show in the overall ratings or rating distributions.</p>
             <p>Older demographics tend to prefer HTTYD1 and anti-prefer HTTYD3 the most: the older you get, the bigger the 1 > 2 > 3 part of the pie gets. Thinking that writing is the worst aspect of The Hidden World is its writing also generally increases with age (although baseline is fairly high to begin with).</p>
 
+            <h2>Gauss rule</h2>
+            <p>When it comes to rating distributions, Gauss rules supreme. Ratings seem to be roughly normally distributed for HTTYD1, HTTYD2 and the series.</p>
+            <p>Ratings for The Hidden World related question contain a few caveats, though. While ratings for the movie used to be more evenly distributed for the first 300 votes or so without a trace of Gauss, a very faint, wide (and somewhat asymmetrical) bell curve eventually emerged, with peak on 7 and 8 out of 10. Ratings do have a second peak at 1/10, though. THW ever so slighty divisive.</p>
+            <p>THW ratings aren't the only place we see a bimodal distribution and division: same applies to Light Fury rating and ending rating. Both are bimodal, with peaks at 1 and 7 for the Light Fury graph and 1 and 10 (very divisive!) for the question of whether the ending is fit or not (the bell curve around the 1 peak seems to skip 2/10 for some reason).</p>
+
             <h2>The Hidden World would be a better movie if it wasn't a part of the franchise</h2>
             <p>
               This question brings no surprises <i>at all.</i> I've filtered the charts to only include results of people who thought The Hidden World is bad (&lt;5 — we ain't doing 'net promotor' crap even tho some people might have voted that way) and — surprise but not really — a slim majority of those people believes that the movie would be better if it wasn't a part of the franchise.  13.5% believe that THW would be just as trash as it is now, and the rest have no opinion either way.
